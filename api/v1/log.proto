@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package log.v1;
+
+option go_package = "github.com/Jxancestral17/distributed_services_learn/distributed_services/api/log_v1";
+
+/*
+Campi che non possono essere modificati
+Raggruppare i messaggi in base ad una versione pricinpale 
+Bumping di versioni principali evento raro
+Per aumentare le versioni crea una dic con la versione rendendo incompatibili quelle vecchie
+gogoprotobuf migliore
+protoc-gen-go installare senno cristi solamente
+protoc --go_out=. log.proto     -> versione piu stupida 
+https://www.youtube.com/watch?v=gbrPMv_GuQY ->mnuto 8.30/9
+*/
+message Record {
+    bytes value = 1;
+    uint64 offset = 2;
+}
