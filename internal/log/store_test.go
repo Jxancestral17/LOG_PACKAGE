@@ -35,7 +35,7 @@ func TestStoreAppendRead(t *testing.T) {
 	testRead(t, s)
 	testReadAt(t, s)
 
-	s, err := newStore(f)
+	s, err = newStore(f)
 	require.NoError(t, err)
 	testRead(t, s)
 
@@ -96,7 +96,7 @@ func TestStoreClose(t *testing.T) {
 
 	defer os.Remove(f.Name())
 
-	s, err := newStore()
+	s, err := newStore(f)
 	require.NoError(t, err)
 	_, _, err = s.Append(write)
 
@@ -104,7 +104,7 @@ func TestStoreClose(t *testing.T) {
 	require.NoError(t, err)
 
 	err = s.Close()
-	require.NoError(r, err)
+	require.NoError(t, err)
 
 	_, afterSize, err := openFile(f.Name())
 	require.NoError(t, err)
@@ -125,7 +125,7 @@ func openFile(name string) (file *os.File, siez int64, err error) {
 	}
 	fi, err := f.Stat()
 	if err != nil {
-		return nil, o, err
+		return nil, 0, err
 	}
 	return f, fi.Size(), nil
 
